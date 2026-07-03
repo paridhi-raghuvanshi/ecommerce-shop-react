@@ -13,7 +13,7 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         {/* Logo */}
         <Link to={"/"}>
-          <h1 className="text-xl font-bold text-primary">Ecommerce Shop</h1>
+          <h1 className="text-xl font-bold text-primary">ShopEase</h1>
         </Link>
 
         {/* Cart icon */}
