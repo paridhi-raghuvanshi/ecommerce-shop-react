@@ -10,6 +10,7 @@ const Product = ({ product }) => {
 
   // destructure product
   const { id, image, category, title, price } = product;
+  const conversionRate = 83;
   return (
     <div>
       <div className="border border-[#e4e4e4] h-[300px] mb-4 relative overflow-hidden group transition">
@@ -46,10 +47,7 @@ const Product = ({ product }) => {
         </Link>
 
         <h2 className="font-semibold">
-            {new Intl.NumberFormat("en-IN", {
-            style: "currency",
-            currency: "INR"
-            }).format(price)}
+          ₹ {(price * conversionRate).toFixed(2)}
         </h2>
 
       </div>
