@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
 import { ProductContext } from "../contexts/ProductContext";
+import { formatPrice } from "../utils/priceFormatter";   // ✅ import helper
 
 const ProductDetails = () => {
   // get the product id from url
@@ -9,7 +10,7 @@ const ProductDetails = () => {
   const { addToCart } = useContext(CartContext);
   const { products } = useContext(ProductContext);
 
-  //get the single product based on id
+  // get the single product based on id
   const product = products.find((item) => {
     return item.id === parseInt(id);
   });
@@ -36,10 +37,20 @@ const ProductDetails = () => {
           </div>
           {/* text */}
           <div className="flex-1 text-center lg:text-left">
-            <h1 className="text-[26px] font-medium mb-2 max-w-[450px] mx-auto lg:mx-0">{title}</h1>
-            <div className="text-2xl text-red-500 font-medium mb-6">$ {price}</div>
+            <h1 className="text-[26px] font-medium mb-2 max-w-[450px] mx-auto lg:mx-0">
+              {title}
+            </h1>
+            {/* ✅ price with ₹ */}
+            <div className="text-2xl text-red-500 font-medium mb-6">
+              {formatPrice(price)}
+            </div>
             <p className="mb-8">{description}</p>
-            <button onClick={()=>addToCart(product, product.id)} className='bg-primary py-4 px-8 text-white'>Add to cart</button>
+            <button
+              onClick={() => addToCart(product, product.id)}
+              className="bg-primary py-4 px-8 text-white"
+            >
+              Add to cart
+            </button>
           </div>
         </div>
       </div>

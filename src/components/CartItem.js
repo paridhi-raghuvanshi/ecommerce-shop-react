@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-
 import { IoMdAdd, IoMdClose, IoMdRemove } from "react-icons/io";
-
 import { CartContext } from "../contexts/CartContext";
+import { formatPrice } from "../utils/priceFormatter";
 
 const CartItem = ({ item }) => {
   const { removeFromCart, increaseAmount, decreaseAmount } = useContext(CartContext);
@@ -38,24 +37,30 @@ const CartItem = ({ item }) => {
           <div className="flex gap-x-2 h-[36px] text-sm">
             {/* quantity */}
             <div className="flex flex-1 max-w-[100px] items-center h-full border text-primary font-medium">
-              <div onClick={()=>decreaseAmount(id)} className="h-full flex-1 flex justify-center items-center cursor-pointer">
+              <div
+                onClick={() => decreaseAmount(id)}
+                className="h-full flex-1 flex justify-center items-center cursor-pointer"
+              >
                 <IoMdRemove />
               </div>
               <div className="h-full flex justify-center items-center px-2">
                 {amount}
               </div>
-              <div onClick={()=>increaseAmount(id)} className="h-full flex flex-1 justify-center items-center cursor-pointer">
+              <div
+                onClick={() => increaseAmount(id)}
+                className="h-full flex flex-1 justify-center items-center cursor-pointer"
+              >
                 <IoMdAdd />
               </div>
             </div>
             {/* item price */}
             <div className="flex flex-1 justify-around items-center">
-              $ {price}
+              {formatPrice(price)}
             </div>
             {/* final price */}
-            <div className="flex flex-1 justify-end items-center text-primary font-medium">{`$ ${parseFloat(
-              price * amount
-            ).toFixed(2)}`}</div>
+            <div className="flex flex-1 justify-end items-center text-primary font-medium">
+              {formatPrice(price * amount)}
+            </div>
           </div>
         </div>
       </div>

@@ -1,16 +1,15 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-
 import { BsPlus, BsEyeFill } from "react-icons/bs";
-
 import { CartContext } from "../contexts/CartContext";
+import { formatPrice } from "../utils/priceFormatter";
 
 const Product = ({ product }) => {
   const { addToCart } = useContext(CartContext);
 
   // destructure product
   const { id, image, category, title, price } = product;
-  const conversionRate = 83;
+
   return (
     <div>
       <div className="border border-[#e4e4e4] h-[300px] mb-4 relative overflow-hidden group transition">
@@ -46,10 +45,8 @@ const Product = ({ product }) => {
           <h2 className="font-semibold mb-1">{title}</h2>
         </Link>
 
-        <h2 className="font-semibold">
-          ₹ {(price * conversionRate).toFixed(2)}
-        </h2>
-
+        {/* price with ₹ symbol */}
+        <h2 className="font-semibold">{formatPrice(price)}</h2>
       </div>
     </div>
   );
